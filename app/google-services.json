@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "72548724665",
+    "project_id": "day-marker",
+    "storage_bucket": "day-marker.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:72548724665:android:54e5496c6a009807429068",
+        "android_client_info": {
+          "package_name": "com.example.daymarker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "72548724665-k8ivobjqed3racmri9qvlkjb9irjhjeg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB0uxVRMP8BuP-1IAjik-jZ_fAkG3CcmFM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "72548724665-k8ivobjqed3racmri9qvlkjb9irjhjeg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
