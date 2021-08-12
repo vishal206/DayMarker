@@ -1,10 +1,14 @@
 package com.example.daymarker;
 
+import android.app.AlertDialog;
 import android.content.Context;
 import android.provider.CalendarContract;
 import android.util.AttributeSet;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -32,7 +36,9 @@ public class CustomCalenderView extends LinearLayout {
     SimpleDateFormat monthFormat=new SimpleDateFormat("MMMM",Locale.ENGLISH);
     SimpleDateFormat yearFormat=new SimpleDateFormat("yyyy",Locale.ENGLISH);
 
+    MyGridAdapter myGridAdapter;
 
+    AlertDialog alertDialog;
     List<Date> dates=new ArrayList<>();
     List<Events> eventsList=new ArrayList<>();
 
@@ -60,10 +66,37 @@ public class CustomCalenderView extends LinearLayout {
                 SetUpCalender();
             }
         });
+        gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                builder.setCancelable(true);
+                View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_event_layout,null);
+                EditText EventName=addView.findViewById(R.id.edt_note);
+                Button btn_done=addView.findViewById(R.id.btn_done);
+                String date=dateFormat.format(dates.get(position));
+                String month=monthFormat.format(dates.get(position));
+                String year=yearFormat.format(dates.get(position));
+                btn_done.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        SaveEvent(EventName.getText().toString(),date,month,year);
+                        SetUpCalender();
+                        alertDialog.dismiss();
+                    }
+                });
+                builder.setView(addView);
+                alertDialog=builder.create();
+                alertDialog.show();
+            }
+        });
     }
 
     public CustomCalenderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
+    }
+    private void SaveEvent(String event,String date,String month,String year){
+        //database
     }
 
     private void IntializeLayout(){
@@ -78,5 +111,18 @@ public class CustomCalenderView extends LinearLayout {
     private void SetUpCalender(){
         String currentDate=dateFormat.format(calendar.getTime());
         CurrentDate.setText(currentDate);
+        dates.clear();
+        Calendar monthCalendar=(Calendar)calendar.clone();
+        monthCalendar.set(Calendar.DAY_OF_MONTH,1);
+        int FirstDayofMonth=monthCalendar.get(Calendar.DAY_OF_WEEK)-1;
+        monthCalendar.add(Calendar.DAY_OF_MONTH,-FirstDayofMonth);
+
+        while(dates.size()<MAX_CALENDER_DAYS){
+            dates.add(monthCalendar.getTime());
+            monthCalendar.add(Calendar.DAY_OF_MONTH,1);
+
+        }
+        myGridAdapter=new MyGridAdapter(context,dates,calendar,eventsList);
+        gridView.setAdapter(myGridAdapter);
     }
 }
