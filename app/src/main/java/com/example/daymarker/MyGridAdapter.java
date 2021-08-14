@@ -88,20 +88,13 @@ public class MyGridAdapter extends ArrayAdapter {
 
 
                 for (int i = 0; i < events.size(); i++) {
-//            EventNumber.setText("hey");
             eventCalendar.setTime(ConvertStringToDate(events.get(i).getDATE()));
 
             if(DayNo==eventCalendar.get(Calendar.DAY_OF_MONTH) && displayMonth==eventCalendar.get(Calendar.MONTH)+1 &&
             displayYear==eventCalendar.get(Calendar.YEAR)){
-//                arrayList.add(events.get(i).getEVENT());
-//                EventNumber.setText(arrayList.size()+""+events);
 
                         EventNumber.setText(events.get(i).getTITLE());
-//                        view.setBackgroundColor(events.get(i).getColor());
                 single_card.setCardBackgroundColor(events.get(i).getColor());
-//                single_card.setCardBackgroundColor(ContextCompat.getColor(context,events.get(i).getColor()));
-
-//                EventNumber.setText(events.get(i).getEVENT());
 
             }
         }

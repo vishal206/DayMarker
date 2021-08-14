@@ -3,6 +3,7 @@ package com.example.daymarker;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.provider.CalendarContract;
 import android.util.AttributeSet;
 import android.util.Log;
@@ -26,6 +27,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
@@ -41,6 +43,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.util.Set;
 
 import yuku.ambilwarna.AmbilWarnaDialog;
 
@@ -54,6 +57,8 @@ public class CustomCalenderView extends LinearLayout {
     private static final int MAX_CALENDER_DAYS=42;
     Calendar calendar=Calendar.getInstance(Locale.ENGLISH);
     Context context;
+
+    FloatingActionButton btn_refresh;
 
     SimpleDateFormat dateFormat=new SimpleDateFormat("MMMM yyyy",Locale.ENGLISH);
     SimpleDateFormat monthFormat=new SimpleDateFormat("MMMM",Locale.ENGLISH);
@@ -93,6 +98,12 @@ public class CustomCalenderView extends LinearLayout {
         IntializeLayout();
         SetUpCalender();
         CollectMarker();
+        btn_refresh.setOnClickListener(new OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SetUpCalender();
+            }
+        });
         btn_previous.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -114,10 +125,14 @@ public class CustomCalenderView extends LinearLayout {
 
                 AlertDialog.Builder builder=new AlertDialog.Builder(context);
                 builder.setCancelable(true);
-                View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_event_layout,parent,false);
+
+                View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_event_layout,null);
+
                 EditText EventNote=addView.findViewById(R.id.edt_note);
                 Button btn_done=addView.findViewById(R.id.btn_done);
                 btn_addMarker=addView.findViewById(R.id.btn_add_marker);
+
+//                dialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
 
                 String date=eventDateFormat.format(dates.get(position));
@@ -134,7 +149,9 @@ public class CustomCalenderView extends LinearLayout {
                     public void onClick(View v) {
                         AlertDialog.Builder builder=new AlertDialog.Builder(context);
                         builder.setCancelable(true);
+
                         View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_marker,parent,false);
+
 
                         edt_title=addView.findViewById(R.id.edt_title);
                         btn_select_color=addView.findViewById(R.id.btn_SelectColor);
@@ -183,6 +200,7 @@ public class CustomCalenderView extends LinearLayout {
                         alertDialog.show();
 
 
+
                     }
                 });
                 btn_done.setOnClickListener(new OnClickListener() {
@@ -192,6 +210,7 @@ public class CustomCalenderView extends LinearLayout {
                         SaveEvent(EventNote.getText().toString(),date,month,year,title,color);
                         SetUpCalender();
                         alertDialog.dismiss();
+
                     }
                 });
                 setAdapter();
@@ -241,6 +260,7 @@ public class CustomCalenderView extends LinearLayout {
         });
     }
 
+
     
 
     public CustomCalenderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
@@ -277,7 +297,7 @@ public class CustomCalenderView extends LinearLayout {
         btn_previous=view.findViewById(R.id.btn_previous);
         CurrentDate=view.findViewById(R.id.txt_month);
         gridView=view.findViewById(R.id.GridView);
-
+        btn_refresh=view.findViewById(R.id.btn_refresh);
     }
     private void SetUpCalender(){
         String currentDate=dateFormat.format(calendar.getTime());
@@ -334,8 +354,26 @@ public class CustomCalenderView extends LinearLayout {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Events events=new Events(document.get("note").toString(),document.get("date").toString(),document.get("month").toString(),document.get("year").toString(),document.get("title").toString(),Integer.parseInt(document.get("color").toString()));
-                                eventsList.add(events);
+                                int ct=0;
+                                if(eventsList.size()>0){
+                                    for(int i=0;i<eventsList.size();i++){
+                                        if(document.get("date")==eventsList.get(i).getDATE()){
+                                            eventsList.get(i).setColor(Integer.parseInt(document.get("color").toString()));
+                                            eventsList.get(i).setEVENT(document.get("note").toString());
+                                            eventsList.get(i).setTITLE(document.get("title").toString());
+                                            ct++;
+                                            break;
+                                        }
+                                    }
+                                    if(ct==0){
+                                        Events events=new Events(document.get("note").toString(),document.get("date").toString(),document.get("month").toString(),document.get("year").toString(),document.get("title").toString(),Integer.parseInt(document.get("color").toString()));
+                                        eventsList.add(events);
+                                    }
+                                }else{
+                                    Events events=new Events(document.get("note").toString(),document.get("date").toString(),document.get("month").toString(),document.get("year").toString(),document.get("title").toString(),Integer.parseInt(document.get("color").toString()));
+                                    eventsList.add(events);
+                                }
+
                                 Log.d("Log.d",""+document.get("note"));
                             }
                         } else {

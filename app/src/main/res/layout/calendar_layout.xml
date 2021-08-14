@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/app_back"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:background="@color/app_back">
 
     <androidx.cardview.widget.CardView
         android:layout_width="0dp"
         android:layout_height="0dp"
-        app:cardCornerRadius="20dp"
         android:backgroundTint="@color/white"
+        app:cardCornerRadius="20dp"
         app:layout_constraintBottom_toTopOf="@+id/guideline17"
         app:layout_constraintEnd_toStartOf="@+id/guideline15"
         app:layout_constraintStart_toStartOf="@+id/guideline3"
-        app:layout_constraintTop_toTopOf="@+id/guideline16" >
+        app:layout_constraintTop_toTopOf="@+id/guideline16">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -26,6 +27,7 @@
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="Month 2021"
+                android:textStyle="bold"
                 android:textColor="@color/btn_colour"
                 app:layout_constraintBottom_toTopOf="@+id/guideline20"
                 app:layout_constraintEnd_toStartOf="@+id/guideline24"
@@ -34,7 +36,7 @@
 
             <ImageButton
                 android:id="@+id/btn_previous"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@null"
                 android:src="@drawable/ic_action_back_arrow"
@@ -45,7 +47,7 @@
 
             <ImageButton
                 android:id="@+id/btn_nxt"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:background="@null"
                 app:layout_constraintBottom_toTopOf="@+id/guideline20"
@@ -59,8 +61,9 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:autoSizeTextType="uniform"
-                android:text="S"
                 android:gravity="center"
+                android:text="S"
+                android:textStyle="bold"
                 android:textColor="@color/btn_colour"
                 app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toStartOf="@+id/guideline25"
@@ -72,9 +75,10 @@
                 android:id="@+id/textView5"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:gravity="center"
                 android:autoSizeTextType="uniform"
+                android:gravity="center"
                 android:text="M"
+                android:textStyle="bold"
                 android:textColor="@color/btn_colour"
                 app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toStartOf="@+id/guideline26"
@@ -86,9 +90,10 @@
                 android:id="@+id/textView6"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:gravity="center"
                 android:autoSizeTextType="uniform"
+                android:gravity="center"
                 android:text="T"
+                android:textStyle="bold"
                 android:textColor="@color/btn_colour"
                 app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toStartOf="@+id/guideline27"
@@ -103,6 +108,7 @@
                 android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:text="W"
+                android:textStyle="bold"
                 android:textColor="@color/btn_colour"
                 app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toStartOf="@+id/guideline28"
@@ -115,8 +121,9 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:autoSizeTextType="uniform"
-                android:text="T"
                 android:gravity="center"
+                android:text="T"
+                android:textStyle="bold"
                 android:textColor="@color/btn_colour"
                 app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toStartOf="@+id/guideline29"
@@ -129,8 +136,9 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:autoSizeTextType="uniform"
-                android:text="F"
                 android:gravity="center"
+                android:text="F"
+                android:textStyle="bold"
                 android:textColor="@color/btn_colour"
                 app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toStartOf="@+id/guideline30"
@@ -143,8 +151,9 @@
                 android:layout_width="0dp"
                 android:layout_height="0dp"
                 android:autoSizeTextType="uniform"
-                android:text="S"
                 android:gravity="center"
+                android:text="S"
+                android:textStyle="bold"
                 android:textColor="@color/btn_colour"
                 app:layout_constraintBottom_toTopOf="@+id/guideline22"
                 app:layout_constraintEnd_toStartOf="@+id/guideline24"
@@ -153,14 +162,14 @@
                 app:layout_constraintVertical_bias="0.454" />
 
             <GridView
+                android:id="@+id/GridView"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-                android:id="@+id/GridView"
                 android:numColumns="7"
                 app:layout_constraintBottom_toTopOf="@+id/guideline32"
                 app:layout_constraintEnd_toStartOf="@+id/guideline24"
                 app:layout_constraintStart_toStartOf="@+id/guideline23"
-                app:layout_constraintTop_toTopOf="@+id/guideline31" >
+                app:layout_constraintTop_toTopOf="@+id/guideline31">
 
             </GridView>
 
@@ -266,10 +275,33 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-
     </androidx.cardview.widget.CardView>
 
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/btn_refresh"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:backgroundTint="@color/btn_colour"
+        android:foreground="@drawable/ic_action_refresh"
+        app:layout_constraintBottom_toTopOf="@+id/guideline54"
+        app:layout_constraintEnd_toStartOf="@+id/guideline79"
+        app:layout_constraintStart_toStartOf="@+id/guideline78"
+        app:layout_constraintTop_toTopOf="@+id/guideline18" />
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline18"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.83" />
+
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline54"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_percent="0.9" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline3"
@@ -279,11 +311,25 @@
         app:layout_constraintGuide_percent="0.050890584" />
 
     <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline78"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.46" />
+
+    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline15"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.94" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline79"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.58" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline16"

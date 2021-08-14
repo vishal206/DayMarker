@@ -25,14 +25,7 @@ public class HomeActivity extends AppCompatActivity {
 
         customCalenderView=(CustomCalenderView)findViewById(R.id.custom_calender_view);
 
-        btn_add_marker=findViewById(R.id.btn_add_homeMarker);
 
-        btn_add_marker.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivity(new Intent(HomeActivity.this,ProfileActivity.class));
-            }
-        });
 
     }
 
