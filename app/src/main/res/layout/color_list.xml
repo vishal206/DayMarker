@@ -15,7 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <TextView
-            android:id="@+id/txt_color_circle"
+            android:id="@+id/txt_color_bar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@color/green"

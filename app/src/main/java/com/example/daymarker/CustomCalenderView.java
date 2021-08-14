@@ -62,20 +62,22 @@ public class CustomCalenderView extends LinearLayout {
 
     MyGridAdapter myGridAdapter;
 
-    private colorAdapter.RecyclerViewClickListener listener;
-    private RecyclerView color_recyclerView;
+    private RecyclerView marker_recyclerView;
 
     AlertDialog alertDialog;
     List<Date> dates=new ArrayList<>();
     List<Events> eventsList=new ArrayList<>();
 
     EditText edt_title;
+    private colorTitleAdapter.RecyclerViewClickListener listener;
 
     List<colorTitleClass> colorTitleClassList=new ArrayList<>();
 
     int mDefaultcolor;
     Button btn_select_color;
     TextView txt_showColor;
+
+    TextView txt_title;
 
 
 
@@ -88,6 +90,7 @@ public class CustomCalenderView extends LinearLayout {
         this.context=context;
         IntializeLayout();
         SetUpCalender();
+        CollectMarker();
         btn_previous.setOnClickListener(new OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -119,6 +122,9 @@ public class CustomCalenderView extends LinearLayout {
                 String month=monthFormat.format(dates.get(position));
                 String year=yearFormat.format(dates.get(position));
 
+                marker_recyclerView=addView.findViewById(R.id.marker_recyclerView);
+
+                txt_title=addView.findViewById(R.id.txt_title);
 
                 btn_done.setOnClickListener(new OnClickListener() {
                     @Override
@@ -126,7 +132,6 @@ public class CustomCalenderView extends LinearLayout {
                         SaveEvent(EventNote.getText().toString(),date,month,year);
                         SetUpCalender();
                         alertDialog.dismiss();
-
                     }
                 });
                 btn_addMarker.setOnClickListener(new OnClickListener() {
@@ -166,11 +171,13 @@ public class CustomCalenderView extends LinearLayout {
                                     @Override
                                     public void onComplete(@NonNull Task<Void> task) {
                                         if (task.isSuccessful()){
-                                            Toast.makeText(context, "added", Toast.LENGTH_SHORT).show();
+                                            colorTitleClass c1=new colorTitleClass(edt_title.getText().toString(),mDefaultcolor);
+                                            colorTitleClassList.add(c1);
+                                            setAdapter();
+                                            Toast.makeText(context, "saved"+colorTitleClassList.get(3).getTitle(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
-
 
                                 alertDialog.dismiss();
                             }
@@ -183,10 +190,31 @@ public class CustomCalenderView extends LinearLayout {
 
                     }
                 });
+                setAdapter();
 
                 builder.setView(addView);
                 alertDialog=builder.create();
                 alertDialog.show();
+            }
+
+            private void setAdapter() {
+                setAdapterOnClickListener();
+                colorTitleAdapter adapter=new colorTitleAdapter(colorTitleClassList,listener);
+                adapter.notifyDataSetChanged();
+                RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(context);
+                marker_recyclerView.setLayoutManager(layoutManager);
+                marker_recyclerView.setItemAnimator(new DefaultItemAnimator());
+                marker_recyclerView.setAdapter(adapter);
+            }
+
+            private void setAdapterOnClickListener() {
+                listener=new colorTitleAdapter.RecyclerViewClickListener() {
+                    @Override
+                    public void onClick(View v, int position) {
+                        Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
+                        txt_title.setText(colorTitleClassList.get(position).getTitle());
+                    }
+                };
             }
 
             private void openColorPicker() {
@@ -265,6 +293,25 @@ public class CustomCalenderView extends LinearLayout {
         gridView.setAdapter(myGridAdapter);
     }
 
+    private void CollectMarker(){
+        FirebaseFirestore.getInstance().collection("Users").document(uid).collection("markers").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                colorTitleClass c1=new colorTitleClass(document.get("Title").toString(),Integer.parseInt(document.get("color").toString()));
+                                colorTitleClassList.add(c1);
+                                Log.d("Log.d",""+document.get("Title"));
+                            }
+                        }else{
+                            Log.d("Log.d", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+    }
+
+
 
     private void CollectEventPerMonth(){
         //database ,get-event,date,month,year, with that create a new Event(given below)
@@ -289,21 +336,7 @@ public class CustomCalenderView extends LinearLayout {
                     }
                 });
 
-        FirebaseFirestore.getInstance().collection("Users").document(uid).collection("markers").get()
-                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
-                        if (task.isSuccessful()){
-                            for(QueryDocumentSnapshot document : task.getResult()){
-                                colorTitleClass c1=new colorTitleClass(edt_title.getText().toString(),mDefaultcolor);
-                                colorTitleClassList.add(c1);
-                                Log.d("Log.d",""+document.get("Title"));
-                            }
-                        }else{
-                            Log.d("Log.d", "Error getting documents: ", task.getException());
-                        }
-                    }
-                });
+
 
     }
 
