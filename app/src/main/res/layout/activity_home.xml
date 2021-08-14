@@ -14,4 +14,25 @@
 
    </com.example.daymarker.CustomCalenderView>
 
+   <com.google.android.material.bottomnavigation.BottomNavigationView
+       android:id="@+id/navigation"
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       android:layout_gravity="bottom"
+       android:background="@drawable/my_bar"
+       app:labelVisibilityMode="labeled"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="@+id/guideline18"
+       app:menu="@menu/my_menu">
+
+   </com.google.android.material.bottomnavigation.BottomNavigationView>
+
+   <androidx.constraintlayout.widget.Guideline
+       android:id="@+id/guideline18"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       app:layout_constraintGuide_percent="0.92" />
 </androidx.constraintlayout.widget.ConstraintLayout>
