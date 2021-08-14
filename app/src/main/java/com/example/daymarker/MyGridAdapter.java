@@ -13,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -64,6 +66,7 @@ public class MyGridAdapter extends ArrayAdapter {
         }
         if(displayMonth==currentMonth && displayYear==currentYear){
             txt_Date=view.findViewById(R.id.calendar_day);
+
             txt_Date.setTextColor(Color.parseColor("#000000"));
 
 //            view.setBackgroundColor(getContext().getResources().getColor(R.color.green));
@@ -78,6 +81,7 @@ public class MyGridAdapter extends ArrayAdapter {
 
         TextView Day_Number=view.findViewById(R.id.calendar_day);
         TextView EventNumber=view.findViewById(R.id.event_id);
+        CardView single_card=view.findViewById(R.id.single_cardview);
         Day_Number.setText(String.valueOf(DayNo));
 //        EventNumber.setText("event");
         Calendar eventCalendar = Calendar.getInstance();
@@ -92,7 +96,10 @@ public class MyGridAdapter extends ArrayAdapter {
 //                arrayList.add(events.get(i).getEVENT());
 //                EventNumber.setText(arrayList.size()+""+events);
 
-                        EventNumber.setText(events.get(i).getEVENT());
+                        EventNumber.setText(events.get(i).getTITLE());
+//                        view.setBackgroundColor(events.get(i).getColor());
+                single_card.setCardBackgroundColor(events.get(i).getColor());
+//                single_card.setCardBackgroundColor(ContextCompat.getColor(context,events.get(i).getColor()));
 
 //                EventNumber.setText(events.get(i).getEVENT());
 

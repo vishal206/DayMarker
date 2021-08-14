@@ -1,13 +1,32 @@
 package com.example.daymarker;
 
 public class Events {
-    String EVENT,DATE,MONTH,YEAR;
+    String EVENT,DATE,MONTH,YEAR,TITLE;
+    int color;
 
-    public Events(String EVENT, String DATE, String MONTH, String YEAR) {
+    public Events(String EVENT, String DATE, String MONTH, String YEAR,String TITLE,int color) {
         this.EVENT = EVENT;
         this.DATE = DATE;
         this.MONTH = MONTH;
         this.YEAR = YEAR;
+        this.TITLE=TITLE;
+        this.color=color;
+    }
+
+    public String getTITLE() {
+        return TITLE;
+    }
+
+    public void setTITLE(String TITLE) {
+        this.TITLE = TITLE;
+    }
+
+    public int getColor() {
+        return color;
+    }
+
+    public void setColor(int color) {
+        this.color = color;
     }
 
     public String getEVENT() {

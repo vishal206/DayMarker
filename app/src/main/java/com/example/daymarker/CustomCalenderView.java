@@ -78,6 +78,8 @@ public class CustomCalenderView extends LinearLayout {
     TextView txt_showColor;
 
     TextView txt_title;
+    private String title;
+    private int color;
 
 
 
@@ -126,14 +128,7 @@ public class CustomCalenderView extends LinearLayout {
 
                 txt_title=addView.findViewById(R.id.txt_title);
 
-                btn_done.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        SaveEvent(EventNote.getText().toString(),date,month,year);
-                        SetUpCalender();
-                        alertDialog.dismiss();
-                    }
-                });
+
                 btn_addMarker.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
@@ -190,6 +185,15 @@ public class CustomCalenderView extends LinearLayout {
 
                     }
                 });
+                btn_done.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        SaveEvent(EventNote.getText().toString(),date,month,year,title,color);
+                        SetUpCalender();
+                        alertDialog.dismiss();
+                    }
+                });
                 setAdapter();
 
                 builder.setView(addView);
@@ -211,6 +215,8 @@ public class CustomCalenderView extends LinearLayout {
                 listener=new colorTitleAdapter.RecyclerViewClickListener() {
                     @Override
                     public void onClick(View v, int position) {
+                        title=colorTitleClassList.get(position).getTitle();
+                        color=colorTitleClassList.get(position).getColor();
                         Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
                         txt_title.setText(colorTitleClassList.get(position).getTitle());
                     }
@@ -240,7 +246,7 @@ public class CustomCalenderView extends LinearLayout {
     public CustomCalenderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
     }
-    private void SaveEvent(String event,String date,String month,String year){
+    private void SaveEvent(String event,String date,String month,String year,String title,int color){
         //database
         mAuth=FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
@@ -252,6 +258,8 @@ public class CustomCalenderView extends LinearLayout {
         hashMap.put("month",month);
         hashMap.put("year",year);
         hashMap.put("note",event);
+        hashMap.put("title",title);
+        hashMap.put("color",color);
         ref.set(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
@@ -326,7 +334,7 @@ public class CustomCalenderView extends LinearLayout {
                     public void onComplete(@NonNull Task<QuerySnapshot> task) {
                         if (task.isSuccessful()) {
                             for (QueryDocumentSnapshot document : task.getResult()) {
-                                Events events=new Events(document.get("note").toString(),document.get("date").toString(),document.get("month").toString(),document.get("year").toString());
+                                Events events=new Events(document.get("note").toString(),document.get("date").toString(),document.get("month").toString(),document.get("year").toString(),document.get("title").toString(),Integer.parseInt(document.get("color").toString()));
                                 eventsList.add(events);
                                 Log.d("Log.d",""+document.get("note"));
                             }
