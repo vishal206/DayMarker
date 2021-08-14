@@ -1,15 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/my_bar2">
+
+
+
     <TextView
+        android:id="@+id/textView2"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="Choose the color"
-        android:autoSizeTextType="uniform"
         android:textColor="@color/btn_colour"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline35"
@@ -21,19 +26,32 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:cardCornerRadius="20dp"
-        android:background="@color/white"
+        app:layout_constraintBottom_toTopOf="@+id/guideline51"
+        app:layout_constraintEnd_toStartOf="@+id/guideline40"
+        app:layout_constraintStart_toStartOf="@+id/guideline37"
+        app:layout_constraintTop_toTopOf="@+id/guideline43" >
+        <TextView
+            android:id="@+id/color_show"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/black"/>
+    </androidx.cardview.widget.CardView>
+
+
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/btn_SelectColor"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:background="@drawable/my_button"
+        android:text="select colour"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toTopOf="@+id/guideline36"
         app:layout_constraintEnd_toStartOf="@+id/guideline40"
         app:layout_constraintStart_toStartOf="@+id/guideline37"
-        app:layout_constraintTop_toTopOf="@+id/guideline35" >
+        app:layout_constraintTop_toTopOf="@+id/guideline41">
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:background="@color/white"
-            android:padding="10dp"
-            android:id="@+id/color_recyclerView"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent" />
-    </androidx.cardview.widget.CardView>
+    </androidx.appcompat.widget.AppCompatButton>
 
     <TextView
         android:layout_width="0dp"
@@ -94,21 +112,28 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="156dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline41"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="170dp" />
+        app:layout_constraintGuide_begin="204dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline43"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="218dp" />
+        app:layout_constraintGuide_begin="70dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline51"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="124dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline41"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="151dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline44"
@@ -179,5 +204,7 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         app:layout_constraintGuide_end="270dp" />
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

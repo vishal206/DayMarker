@@ -14,20 +14,30 @@
 
    </com.example.daymarker.CustomCalenderView>
 
-   <com.google.android.material.bottomnavigation.BottomNavigationView
-       android:id="@+id/navigation"
+   <Button
+       android:id="@+id/btn_add_homeMarker"
        android:layout_width="0dp"
        android:layout_height="0dp"
-       android:layout_gravity="bottom"
-       android:background="@drawable/my_bar"
-       app:labelVisibilityMode="labeled"
+       android:text="add"
        app:layout_constraintBottom_toBottomOf="parent"
        app:layout_constraintEnd_toEndOf="parent"
        app:layout_constraintStart_toStartOf="parent"
-       app:layout_constraintTop_toTopOf="@+id/guideline18"
-       app:menu="@menu/my_menu">
+       app:layout_constraintTop_toTopOf="@+id/guideline18" />
 
-   </com.google.android.material.bottomnavigation.BottomNavigationView>
+<!--   <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--       android:id="@+id/navigation"-->
+<!--       android:layout_width="0dp"-->
+<!--       android:layout_height="0dp"-->
+<!--       android:layout_gravity="bottom"-->
+<!--       android:background="@drawable/my_bar"-->
+<!--       app:labelVisibilityMode="labeled"-->
+<!--       app:layout_constraintBottom_toBottomOf="parent"-->
+<!--       app:layout_constraintEnd_toEndOf="parent"-->
+<!--       app:layout_constraintStart_toStartOf="parent"-->
+<!--       app:layout_constraintTop_toTopOf="@+id/guideline18"-->
+<!--       app:menu="@menu/my_menu">-->
+
+<!--   </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
    <androidx.constraintlayout.widget.Guideline
        android:id="@+id/guideline18"

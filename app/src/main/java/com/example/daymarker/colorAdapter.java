@@ -14,9 +14,11 @@ import java.util.ArrayList;
 public class colorAdapter extends RecyclerView.Adapter<colorAdapter.MyViewHolder> {
 
     private ArrayList<String> colorList;
+    private RecyclerViewClickListener listener;
 
-    public colorAdapter(ArrayList<String> colorList) {
+    public colorAdapter(ArrayList<String> colorList,RecyclerViewClickListener listener) {
         this.colorList = colorList;
+        this.listener=listener;
     }
 
     @NonNull
@@ -37,11 +39,21 @@ public class colorAdapter extends RecyclerView.Adapter<colorAdapter.MyViewHolder
         return colorList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         private TextView colorCirle;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
             colorCirle=itemView.findViewById(R.id.txt_color_circle);
         }
+
+        @Override
+        public void onClick(View v) {
+            listener.onClick(v,getAdapterPosition());
+        }
     }
+
+    public interface RecyclerViewClickListener{
+        void onClick(View v,int position);
+    }
+
 }

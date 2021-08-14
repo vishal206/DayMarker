@@ -81,8 +81,6 @@ public class MyGridAdapter extends ArrayAdapter {
         Day_Number.setText(String.valueOf(DayNo));
 //        EventNumber.setText("event");
         Calendar eventCalendar = Calendar.getInstance();
-//        ArrayList<String> arrayList=new ArrayList<>();
-//        System.out.println("+++++++++++++++++@@@@@@@@");
 
 
                 for (int i = 0; i < events.size(); i++) {

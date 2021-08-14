@@ -19,6 +19,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.DefaultItemAnimator;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -41,6 +42,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
+import yuku.ambilwarna.AmbilWarnaDialog;
+
 public class CustomCalenderView extends LinearLayout {
 
     ImageButton btn_nxt,btn_previous,btn_addMarker;
@@ -59,9 +62,21 @@ public class CustomCalenderView extends LinearLayout {
 
     MyGridAdapter myGridAdapter;
 
+    private colorAdapter.RecyclerViewClickListener listener;
+    private RecyclerView color_recyclerView;
+
     AlertDialog alertDialog;
     List<Date> dates=new ArrayList<>();
     List<Events> eventsList=new ArrayList<>();
+
+    EditText edt_title;
+
+    List<colorTitleClass> colorTitleClassList=new ArrayList<>();
+
+    int mDefaultcolor;
+    Button btn_select_color;
+    TextView txt_showColor;
+
 
 
     public CustomCalenderView(Context context) {
@@ -94,7 +109,7 @@ public class CustomCalenderView extends LinearLayout {
 
                 AlertDialog.Builder builder=new AlertDialog.Builder(context);
                 builder.setCancelable(true);
-                View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_event_layout,null);
+                View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_event_layout,parent,false);
                 EditText EventNote=addView.findViewById(R.id.edt_note);
                 Button btn_done=addView.findViewById(R.id.btn_done);
                 btn_addMarker=addView.findViewById(R.id.btn_add_marker);
@@ -117,26 +132,46 @@ public class CustomCalenderView extends LinearLayout {
                 btn_addMarker.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
-
                         AlertDialog.Builder builder=new AlertDialog.Builder(context);
                         builder.setCancelable(true);
-                        View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_marker,null);
+                        View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_marker,parent,false);
+
+                        edt_title=addView.findViewById(R.id.edt_title);
+                        btn_select_color=addView.findViewById(R.id.btn_SelectColor);
+                        mDefaultcolor= ContextCompat.getColor(context,R.color.green);
+                        txt_showColor=addView.findViewById(R.id.color_show);
+
+                        btn_select_color.setOnClickListener(new View.OnClickListener(){
+                            @Override
+                            public void onClick(View v) {
+                                openColorPicker();
+                            }
+                        });
+
                         Button btn_save=addView.findViewById(R.id.btn_save);
-                        ArrayList<String> colorList=new ArrayList<>();
-                        RecyclerView color_recyclerView= addView.findViewById(R.id.color_recyclerView);
-                        colorList.add("#FFDEDE");
-                        colorList.add("#FDF5CA");
-                        colorList.add("#B980F0");
-                        colorList.add("#28FFBF");
-                        colorAdapter adapter=new colorAdapter(colorList);
-                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getContext());
-                        color_recyclerView.setLayoutManager(layoutManager);
-                        color_recyclerView.setItemAnimator(new DefaultItemAnimator());
-                        color_recyclerView.setAdapter(adapter);
                         btn_save.setOnClickListener(new OnClickListener() {
                             @Override
                             public void onClick(View v) {
+//                                Toast.makeText(context, "asasas", Toast.LENGTH_SHORT).show();
+
+
+                                mAuth=FirebaseAuth.getInstance();
+                                FirebaseUser user=mAuth.getCurrentUser();
+                                uid=user.getUid();
+                                DocumentReference ref= FirebaseFirestore.getInstance().collection("Users").document(uid).collection("markers").document(""+mDefaultcolor);
+                                HashMap<String,Object> hashMap=new HashMap<>();
+                                hashMap.put("color",mDefaultcolor);
+                                hashMap.put("Title",edt_title.getText().toString());
+                                ref.set(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<Void> task) {
+                                        if (task.isSuccessful()){
+                                            Toast.makeText(context, "added", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }
+                                });
+
+
                                 alertDialog.dismiss();
                             }
                         });
@@ -144,6 +179,8 @@ public class CustomCalenderView extends LinearLayout {
                         builder.setView(addView);
                         alertDialog=builder.create();
                         alertDialog.show();
+
+
                     }
                 });
 
@@ -151,8 +188,26 @@ public class CustomCalenderView extends LinearLayout {
                 alertDialog=builder.create();
                 alertDialog.show();
             }
+
+            private void openColorPicker() {
+                AmbilWarnaDialog colorPicker=new AmbilWarnaDialog(context, mDefaultcolor, new AmbilWarnaDialog.OnAmbilWarnaListener() {
+                    @Override
+                    public void onCancel(AmbilWarnaDialog dialog) {
+
+                    }
+
+                    @Override
+                    public void onOk(AmbilWarnaDialog dialog, int color) {
+                        mDefaultcolor=color;
+                        txt_showColor.setBackgroundColor(mDefaultcolor);
+                    }
+                });
+                colorPicker.show();
+            }
         });
     }
+
+    
 
     public CustomCalenderView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
@@ -173,8 +228,6 @@ public class CustomCalenderView extends LinearLayout {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 if (task.isSuccessful()){
-//                    Events events=new Events(event,date,month,year);
-//                    eventsList.add(events);
                     Toast.makeText(context, "added", Toast.LENGTH_SHORT).show();
                 }
             }
@@ -208,8 +261,7 @@ public class CustomCalenderView extends LinearLayout {
 
 
         myGridAdapter=new MyGridAdapter(context,dates,calendar,eventsList);
-//        myGridAdapter.notifyDataChanged();
-//        gridView.invalidateViews();
+
         gridView.setAdapter(myGridAdapter);
     }
 
@@ -217,9 +269,6 @@ public class CustomCalenderView extends LinearLayout {
     private void CollectEventPerMonth(){
         //database ,get-event,date,month,year, with that create a new Event(given below)
 
-//        Events events=new Events(event,date,Month,Year);
-//        eventsList.add(events);
-//        eventsList.clear();
         mAuth=FirebaseAuth.getInstance();
         FirebaseUser user=mAuth.getCurrentUser();
         uid=user.getUid();
@@ -240,5 +289,23 @@ public class CustomCalenderView extends LinearLayout {
                     }
                 });
 
+        FirebaseFirestore.getInstance().collection("Users").document(uid).collection("markers").get()
+                .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                    @Override
+                    public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                        if (task.isSuccessful()){
+                            for(QueryDocumentSnapshot document : task.getResult()){
+                                colorTitleClass c1=new colorTitleClass(edt_title.getText().toString(),mDefaultcolor);
+                                colorTitleClassList.add(c1);
+                                Log.d("Log.d",""+document.get("Title"));
+                            }
+                        }else{
+                            Log.d("Log.d", "Error getting documents: ", task.getException());
+                        }
+                    }
+                });
+
     }
+
+
 }

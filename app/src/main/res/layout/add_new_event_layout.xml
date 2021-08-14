@@ -30,9 +30,9 @@
         app:layout_constraintTop_toTopOf="@+id/guideline35" >
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/marker_recyclerView"
             android:background="@color/white"
             android:padding="10dp"
-            android:id="@+id/marker_recyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </androidx.cardview.widget.CardView>
