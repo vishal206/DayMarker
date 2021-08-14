@@ -7,10 +7,11 @@
     android:background="@drawable/my_bar2">
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="0dp"
         android:gravity="center"
         android:text="Make a mark"
+        android:autoSizeTextType="uniform"
         android:textColor="@color/btn_colour"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline35"
@@ -41,6 +42,7 @@
         android:layout_height="0dp"
         android:gravity="center"
         android:text="Note:"
+        android:autoSizeTextType="uniform"
         android:textColor="@color/btn_colour"
         android:textStyle="bold"
         app:layout_constraintBottom_toTopOf="@+id/guideline45"

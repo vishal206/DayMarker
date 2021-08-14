@@ -19,6 +19,9 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.DefaultItemAnimator;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -84,12 +87,7 @@ public class CustomCalenderView extends LinearLayout {
                 SetUpCalender();
             }
         });
-        btn_addMarker.setOnClickListener(new OnClickListener() {
-            @Override
-            public void onClick(View v) {
 
-            }
-        });
         gridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
@@ -99,10 +97,13 @@ public class CustomCalenderView extends LinearLayout {
                 View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_event_layout,null);
                 EditText EventNote=addView.findViewById(R.id.edt_note);
                 Button btn_done=addView.findViewById(R.id.btn_done);
+                btn_addMarker=addView.findViewById(R.id.btn_add_marker);
+
 
                 String date=eventDateFormat.format(dates.get(position));
                 String month=monthFormat.format(dates.get(position));
                 String year=yearFormat.format(dates.get(position));
+
 
                 btn_done.setOnClickListener(new OnClickListener() {
                     @Override
@@ -113,6 +114,39 @@ public class CustomCalenderView extends LinearLayout {
 
                     }
                 });
+                btn_addMarker.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+
+                        AlertDialog.Builder builder=new AlertDialog.Builder(context);
+                        builder.setCancelable(true);
+                        View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_marker,null);
+                        Button btn_save=addView.findViewById(R.id.btn_save);
+                        ArrayList<String> colorList=new ArrayList<>();
+                        RecyclerView color_recyclerView= addView.findViewById(R.id.color_recyclerView);
+                        colorList.add("#FFDEDE");
+                        colorList.add("#FDF5CA");
+                        colorList.add("#B980F0");
+                        colorList.add("#28FFBF");
+                        colorAdapter adapter=new colorAdapter(colorList);
+                        RecyclerView.LayoutManager layoutManager=new LinearLayoutManager(getContext());
+                        color_recyclerView.setLayoutManager(layoutManager);
+                        color_recyclerView.setItemAnimator(new DefaultItemAnimator());
+                        color_recyclerView.setAdapter(adapter);
+                        btn_save.setOnClickListener(new OnClickListener() {
+                            @Override
+                            public void onClick(View v) {
+                                alertDialog.dismiss();
+                            }
+                        });
+
+                        builder.setView(addView);
+                        alertDialog=builder.create();
+                        alertDialog.show();
+                    }
+                });
+
                 builder.setView(addView);
                 alertDialog=builder.create();
                 alertDialog.show();
@@ -154,7 +188,6 @@ public class CustomCalenderView extends LinearLayout {
         btn_previous=view.findViewById(R.id.btn_previous);
         CurrentDate=view.findViewById(R.id.txt_month);
         gridView=view.findViewById(R.id.GridView);
-        btn_addMarker=view.findViewById(R.id.btn_add_marker);
 
     }
     private void SetUpCalender(){
