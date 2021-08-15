@@ -87,6 +87,7 @@ public class MyGridAdapter extends ArrayAdapter {
 
         TextView Day_Number=view.findViewById(R.id.calendar_day);
         TextView EventNumber=view.findViewById(R.id.event_id);
+        TextView txt_note=view.findViewById(R.id.event_note);
         CardView single_card=view.findViewById(R.id.single_cardview);
         Day_Number.setText(String.valueOf(DayNo));
 //        EventNumber.setText("event");
@@ -100,7 +101,9 @@ public class MyGridAdapter extends ArrayAdapter {
             displayYear==eventCalendar.get(Calendar.YEAR)){
 
                         EventNumber.setText(events.get(i).getTITLE());
+                        txt_note.setText(events.get(i).getEVENT());
                 single_card.setCardBackgroundColor(events.get(i).getColor());
+
 
             }
         }

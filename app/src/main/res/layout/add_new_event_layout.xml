@@ -86,6 +86,8 @@
         android:ems="10"
         android:textColor="@color/black"
         android:hint="type here"
+        android:padding="10dp"
+        android:background="@drawable/my_bar3"
         android:textColorHint="@color/black"
         app:layout_constraintBottom_toTopOf="@+id/guideline46"
         app:layout_constraintEnd_toStartOf="@+id/guideline40"
@@ -186,7 +188,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="408dp" />
+        app:layout_constraintGuide_percent="0.9147982" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline33"

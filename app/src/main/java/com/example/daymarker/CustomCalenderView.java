@@ -146,8 +146,9 @@ public class CustomCalenderView extends LinearLayout {
                 btn_done.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-
+                        String noteit=EventNote.getText().toString();
                         SaveEvent(EventNote.getText().toString(),date,month,year,title,color);
+//                        EventNote.setText(noteit);
                         SetUpCalender();
                         alertDialog.dismiss();
 
@@ -208,9 +209,6 @@ public class CustomCalenderView extends LinearLayout {
                         builder.setView(addView);
                         alertDialog=builder.create();
                         alertDialog.show();
-
-
-
                     }
                 });
 

@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="60dp"
+    android:layout_height="80dp"
     android:orientation="vertical"
     >
 
@@ -15,7 +15,7 @@
         android:outlineSpotShadowColor="@color/white"
         android:outlineAmbientShadowColor="@color/white"
         app:cardBackgroundColor="@color/white"
-        app:cardCornerRadius="10dp"
+        app:cardCornerRadius="5dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -28,11 +28,12 @@
             <TextView
                 android:id="@+id/calendar_day"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
                 android:text="1"
                 android:textSize="20sp"
                 android:textStyle="bold"
+                app:layout_constraintBottom_toTopOf="@+id/guideline55"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -40,16 +41,62 @@
             <TextView
                 android:id="@+id/event_id"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_gravity="center"
+                android:autoSizeTextType="uniform"
                 android:gravity="center"
                 android:textColor="@color/black"
-                android:autoSizeTextType="uniform"
                 android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintBottom_toTopOf="@+id/guideline80"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/calendar_day" />
+                app:layout_constraintTop_toTopOf="@+id/guideline55" />
+
+            <TextView
+                android:id="@+id/event_note"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_gravity="center"
+                android:layout_marginHorizontal="2dp"
+                android:layout_marginVertical="1dp"
+                android:autoSizeTextType="uniform"
+                android:background="@drawable/my_bar4"
+                android:gravity="center"
+                android:textColor="@color/black"
+                app:layout_constraintBottom_toTopOf="@+id/guideline82"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/guideline83" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline55"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="27dp" />
+
+
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline80"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="46dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline83"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="48dp" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guideline82"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_begin="70dp" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 
