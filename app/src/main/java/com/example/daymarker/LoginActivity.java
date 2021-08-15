@@ -17,43 +17,36 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
 import java.util.concurrent.TimeUnit;
 
-public class SignUpActivity extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private FirebaseAuth mAuth;
-    private Button btn_sendOtp,btn_signUp,btn_login;
-    private EditText edt_name,edt_phone,edt_Otp;
+    private Button btn_sendOtp,btn_login,btn_signUp;
+    private EditText edt_phone,edt_Otp;
     private String verificationId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_sign_up);
+        setContentView(R.layout.activity_login);
 
         mAuth=FirebaseAuth.getInstance();
 
-        btn_sendOtp=findViewById(R.id.btn_sendOtp);
-        btn_signUp=findViewById(R.id.btn_signUp2);
-        edt_name=findViewById(R.id.edt_name);
-        edt_Otp=findViewById(R.id.edt_otp);
-        edt_phone=findViewById(R.id.edt_phone);
+        btn_sendOtp=findViewById(R.id.btn_signUp_sendOtp);
+        btn_login=findViewById(R.id.btn_signUp_login);
+        edt_Otp=findViewById(R.id.edt_signUp_otp);
+        edt_phone=findViewById(R.id.edt_signUp_phone);
 
         btn_sendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(TextUtils.isEmpty(edt_name.getText().toString())){
-                    Toast.makeText(SignUpActivity.this, "Enter a username", Toast.LENGTH_SHORT).show();
-                }
-                else if(TextUtils.isEmpty(edt_phone.getText().toString())){
-                    Toast.makeText(SignUpActivity.this, "Enter you phone number", Toast.LENGTH_SHORT).show();
+                if(TextUtils.isEmpty(edt_phone.getText().toString())){
+                    Toast.makeText(LoginActivity.this, "Enter you phone number", Toast.LENGTH_SHORT).show();
                 }
                 else{
                     String phone="+91"+edt_phone.getText().toString();
@@ -62,22 +55,22 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        btn_signUp.setOnClickListener(new View.OnClickListener() {
+        btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(TextUtils.isEmpty(edt_Otp.getText().toString())){
-                    Toast.makeText(SignUpActivity.this, "please enter OTP", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "please enter OTP", Toast.LENGTH_SHORT).show();
                 }else{
                     verifyCode(edt_Otp.getText().toString());
                 }
             }
         });
 
-        btn_login=findViewById(R.id.btn_login_signup);
-        btn_login.setOnClickListener(new View.OnClickListener() {
+        btn_signUp=findViewById(R.id.btn_signUp_signup);
+        btn_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent i=new Intent(SignUpActivity.this,LoginActivity.class);
+                Intent i=new Intent(LoginActivity.this,SignUpActivity.class);
                 startActivity(i);
                 finish();
             }
@@ -95,37 +88,11 @@ public class SignUpActivity extends AppCompatActivity {
                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            String uPhone="+91"+edt_phone.getText().toString();
-                            String uName=edt_name.getText().toString();
-                            FirebaseUser user= mAuth.getCurrentUser();
-                            String uid=user.getUid();
-                            HashMap<String,Object> hashMap=new HashMap<>();
-                            hashMap.put("phone",uPhone);
-                            hashMap.put("uid",uid);
-                            hashMap.put("userName",uName);
-
-                            FirebaseFirestore db=FirebaseFirestore.getInstance();
-                            db.collection("Users").document(uid).set(hashMap).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull  Task<Void> task) {
-                                    if (task.isSuccessful()){
-//                                        Toast.makeText(SignUpActivity.this, "added", Toast.LENGTH_SHORT).show();
-                                        Log.d("output","added");
-                                    }
-                                    else{
-                                        Log.d("output","not added");
-                                    }
-//                                        Toast.makeText(SignUpActivity.this, "not added", Toast.LENGTH_SHORT).show();
-
-                                }
-                            });
-
-                            Intent i=new Intent(SignUpActivity.this,HomeActivity.class);
+                        if(task.isSuccessful()) {
+                            Intent i=new Intent(LoginActivity.this,HomeActivity.class);
                             startActivity(i);
                             finish();
                         }else{
-//                            Toast.makeText(SignUpActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             Log.d("output",task.getException().getMessage());
                         }
                     }
@@ -157,8 +124,8 @@ public class SignUpActivity extends AppCompatActivity {
 
         @Override
         public void onVerificationFailed(@NonNull FirebaseException e) {
-            Toast.makeText(SignUpActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
-
+//            Toast.makeText(LoginActivity.this, e.getMessage(), Toast.LENGTH_SHORT).show();
+            Log.d("output",e.getMessage());
         }
     };
 }
