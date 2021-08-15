@@ -86,6 +86,8 @@ public class CustomCalenderView extends LinearLayout {
     private String title;
     private int color;
 
+    boolean clicked=false;
+
 
 
     public CustomCalenderView(Context context) {
@@ -146,11 +148,17 @@ public class CustomCalenderView extends LinearLayout {
                 btn_done.setOnClickListener(new OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        String noteit=EventNote.getText().toString();
-                        SaveEvent(EventNote.getText().toString(),date,month,year,title,color);
+                        if(clicked==true){
+                            String noteit=EventNote.getText().toString();
+                            SaveEvent(EventNote.getText().toString(),date,month,year,title,color);
 //                        EventNote.setText(noteit);
-                        SetUpCalender();
-                        alertDialog.dismiss();
+                            SetUpCalender();
+                            alertDialog.dismiss();
+                        }
+                        else{
+                            Toast.makeText(context, "select marker", Toast.LENGTH_SHORT).show();
+                        }
+
 
                     }
                 });
@@ -233,6 +241,7 @@ public class CustomCalenderView extends LinearLayout {
                 listener=new colorTitleAdapter.RecyclerViewClickListener() {
                     @Override
                     public void onClick(View v, int position) {
+                        clicked=true;
                         title=colorTitleClassList.get(position).getTitle();
                         color=colorTitleClassList.get(position).getColor();
                         Toast.makeText(context, "color selected", Toast.LENGTH_SHORT).show();
