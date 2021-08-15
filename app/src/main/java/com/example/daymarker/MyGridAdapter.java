@@ -53,7 +53,7 @@ public class MyGridAdapter extends ArrayAdapter {
         int displayYear=dateCalendar.get(Calendar.YEAR);
         int currentMonth=currentDate.get(Calendar.MONTH)+1;
         int currentYear=currentDate.get(Calendar.YEAR);
-
+        int currentdate=currentDate.get(Calendar.DATE);
         Handler mHandler = new Handler();
 
         View view=convertView;
@@ -64,7 +64,13 @@ public class MyGridAdapter extends ArrayAdapter {
             view=inflater.inflate(R.layout.single_cell_layout,parent,false);
 
         }
-        if(displayMonth==currentMonth && displayYear==currentYear){
+        if(displayMonth==currentMonth && displayYear==currentYear && DayNo==currentdate){
+            txt_Date=view.findViewById(R.id.calendar_day);
+            txt_Date.setTextColor(Color.parseColor("#FFFFFF"));
+            CardView single_card=view.findViewById(R.id.single_cardview);
+            single_card.setCardBackgroundColor(Color.parseColor("#FF4848"));
+        }
+        else if(displayMonth==currentMonth && displayYear==currentYear){
             txt_Date=view.findViewById(R.id.calendar_day);
 
             txt_Date.setTextColor(Color.parseColor("#000000"));
