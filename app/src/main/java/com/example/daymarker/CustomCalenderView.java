@@ -143,6 +143,16 @@ public class CustomCalenderView extends LinearLayout {
 
                 txt_title=addView.findViewById(R.id.txt_title);
 
+                btn_done.setOnClickListener(new OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        SaveEvent(EventNote.getText().toString(),date,month,year,title,color);
+                        SetUpCalender();
+                        alertDialog.dismiss();
+
+                    }
+                });
 
                 btn_addMarker.setOnClickListener(new OnClickListener() {
                     @Override
@@ -186,7 +196,7 @@ public class CustomCalenderView extends LinearLayout {
                                             colorTitleClass c1=new colorTitleClass(edt_title.getText().toString(),mDefaultcolor);
                                             colorTitleClassList.add(c1);
                                             setAdapter();
-                                            Toast.makeText(context, "saved"+colorTitleClassList.get(3).getTitle(), Toast.LENGTH_SHORT).show();
+//                                            Toast.makeText(context, "saved"+colorTitleClassList.get(3).getTitle(), Toast.LENGTH_SHORT).show();
                                         }
                                     }
                                 });
@@ -203,16 +213,7 @@ public class CustomCalenderView extends LinearLayout {
 
                     }
                 });
-                btn_done.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
 
-                        SaveEvent(EventNote.getText().toString(),date,month,year,title,color);
-                        SetUpCalender();
-                        alertDialog.dismiss();
-
-                    }
-                });
                 setAdapter();
 
                 builder.setView(addView);
@@ -236,7 +237,7 @@ public class CustomCalenderView extends LinearLayout {
                     public void onClick(View v, int position) {
                         title=colorTitleClassList.get(position).getTitle();
                         color=colorTitleClassList.get(position).getColor();
-                        Toast.makeText(context, "clicked", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(context, "color selected", Toast.LENGTH_SHORT).show();
                         txt_title.setText(colorTitleClassList.get(position).getTitle());
                     }
                 };
