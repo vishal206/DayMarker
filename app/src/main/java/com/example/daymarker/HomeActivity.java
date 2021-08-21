@@ -14,7 +14,7 @@ import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class HomeActivity extends AppCompatActivity {
 
-    private Button btn_add_marker;
+    private Button btn_notes;
 
     CustomCalenderView customCalenderView;
 
@@ -25,6 +25,14 @@ public class HomeActivity extends AppCompatActivity {
 
         customCalenderView=(CustomCalenderView)findViewById(R.id.custom_calender_view);
 
+        btn_notes=findViewById(R.id.btn_notes);
+
+        btn_notes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startActivity(new Intent(HomeActivity.this,NotesActivity.class));
+            }
+        });
 
 
     }

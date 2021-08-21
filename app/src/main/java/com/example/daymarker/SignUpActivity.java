@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -47,8 +48,13 @@ public class SignUpActivity extends AppCompatActivity {
         edt_phone=findViewById(R.id.edt_phone);
 
         btn_sendOtp.setOnClickListener(new View.OnClickListener() {
+
             @Override
             public void onClick(View v) {
+
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
+
                 if(TextUtils.isEmpty(edt_name.getText().toString())){
                     Toast.makeText(SignUpActivity.this, "Enter a username", Toast.LENGTH_SHORT).show();
                 }
@@ -65,6 +71,9 @@ public class SignUpActivity extends AppCompatActivity {
         btn_signUp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
                 if(TextUtils.isEmpty(edt_Otp.getText().toString())){
                     Toast.makeText(SignUpActivity.this, "please enter OTP", Toast.LENGTH_SHORT).show();
                 }else{

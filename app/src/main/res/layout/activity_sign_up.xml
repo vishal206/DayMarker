@@ -126,7 +126,7 @@
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:background="@drawable/my_button"
-            android:text="send OTP"
+            android:text="get OTP"
             android:textColor="@color/white"
             app:layout_constraintBottom_toTopOf="@+id/guideline65"
             app:layout_constraintEnd_toStartOf="@+id/guideline63"

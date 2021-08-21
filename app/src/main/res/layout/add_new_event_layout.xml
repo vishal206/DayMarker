@@ -10,12 +10,12 @@
     <TextView
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:autoSizeTextType="uniform"
         android:gravity="center"
         android:text="Make a mark"
-        android:autoSizeTextType="uniform"
         android:textColor="@color/btn_colour"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline35"
+        app:layout_constraintBottom_toTopOf="@+id/guideline95"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/guideline34" />
@@ -53,19 +53,19 @@
             android:padding="10dp" />
     </androidx.cardview.widget.CardView>
 
-    <TextView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="center_vertical"
-        android:text="Note:"
-        android:autoSizeTextType="uniform"
-        android:textColor="@color/btn_colour"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/guideline45"
-        app:layout_constraintEnd_toStartOf="@+id/guideline40"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/guideline37"
-        app:layout_constraintTop_toTopOf="@+id/guideline44" />
+<!--    <TextView-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:gravity="center_vertical"-->
+<!--        android:text="Note:"-->
+<!--        android:autoSizeTextType="uniform"-->
+<!--        android:textColor="@color/btn_colour"-->
+<!--        android:textStyle="bold"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guideline45"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/guideline40"-->
+<!--        app:layout_constraintHorizontal_bias="0.0"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/guideline37"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/guideline44" />-->
 
     <ImageButton
         android:id="@+id/btn_add_marker"
@@ -79,20 +79,20 @@
         app:layout_constraintTop_toTopOf="@+id/guideline41"
         app:srcCompat="@drawable/ic_action_add" />
 
-    <EditText
-        android:id="@+id/edt_note"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:ems="10"
-        android:textColor="@color/black"
-        android:hint="type here"
-        android:padding="10dp"
-        android:background="@drawable/my_bar3"
-        android:textColorHint="@color/black"
-        app:layout_constraintBottom_toTopOf="@+id/guideline46"
-        app:layout_constraintEnd_toStartOf="@+id/guideline40"
-        app:layout_constraintStart_toStartOf="@+id/guideline37"
-        app:layout_constraintTop_toTopOf="@+id/guideline45" />
+<!--    <EditText-->
+<!--        android:id="@+id/edt_note"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="0dp"-->
+<!--        android:ems="10"-->
+<!--        android:textColor="@color/black"-->
+<!--        android:hint="type here"-->
+<!--        android:padding="10dp"-->
+<!--        android:background="@drawable/my_bar3"-->
+<!--        android:textColorHint="@color/black"-->
+<!--        app:layout_constraintBottom_toTopOf="@+id/guideline46"-->
+<!--        app:layout_constraintEnd_toStartOf="@+id/guideline40"-->
+<!--        app:layout_constraintStart_toStartOf="@+id/guideline37"-->
+<!--        app:layout_constraintTop_toTopOf="@+id/guideline45" />-->
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_done"
@@ -101,17 +101,17 @@
         android:background="@drawable/my_button"
         android:text="done"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toTopOf="@+id/guideline48"
+        app:layout_constraintBottom_toTopOf="@+id/guideline46"
         app:layout_constraintEnd_toStartOf="@+id/guideline40"
         app:layout_constraintStart_toStartOf="@+id/guideline37"
-        app:layout_constraintTop_toTopOf="@+id/guideline47" />
+        app:layout_constraintTop_toTopOf="@+id/guideline45" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline34"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="19dp" />
+        app:layout_constraintGuide_begin="4dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline35"
@@ -119,6 +119,13 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         app:layout_constraintGuide_begin="47dp" />
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/guideline95"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintGuide_begin="33dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline36"
@@ -142,25 +149,18 @@
         app:layout_constraintGuide_begin="218dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline44"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="272dp" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline52"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="223dp" />
+        app:layout_constraintGuide_begin="234dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline53"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="260dp" />
+        app:layout_constraintGuide_begin="278dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline45"
@@ -177,25 +177,11 @@
         app:layout_constraintGuide_begin="349dp" />
 
     <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline47"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="359dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline48"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.9147982" />
-
-    <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline33"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_begin="446dp" />
+        app:layout_constraintGuide_begin="369dp" />
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guideline37"

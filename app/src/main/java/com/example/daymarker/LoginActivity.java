@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -45,6 +46,9 @@ public class LoginActivity extends AppCompatActivity {
         btn_sendOtp.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
                 if(TextUtils.isEmpty(edt_phone.getText().toString())){
                     Toast.makeText(LoginActivity.this, "Enter you phone number", Toast.LENGTH_SHORT).show();
                 }
@@ -58,6 +62,8 @@ public class LoginActivity extends AppCompatActivity {
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                InputMethodManager inputMethodManager = (InputMethodManager)getSystemService(INPUT_METHOD_SERVICE);
+                inputMethodManager.hideSoftInputFromWindow(v.getApplicationWindowToken(),0);
                 if(TextUtils.isEmpty(edt_Otp.getText().toString())){
                     Toast.makeText(LoginActivity.this, "please enter OTP", Toast.LENGTH_SHORT).show();
                 }else{

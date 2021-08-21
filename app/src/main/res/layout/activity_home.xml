@@ -8,28 +8,70 @@
     tools:context=".HomeActivity">
 
    <com.example.daymarker.CustomCalenderView
+       android:id="@+id/custom_calender_view"
        android:layout_width="match_parent"
-       android:layout_height="match_parent"
-       android:id="@+id/custom_calender_view">
+       android:layout_height="0dp"
+       app:layout_constraintBottom_toTopOf="@+id/guideline81"
+       app:layout_constraintTop_toTopOf="parent"
+       tools:layout_editor_absoluteX="-36dp">
 
    </com.example.daymarker.CustomCalenderView>
 
+   <androidx.appcompat.widget.AppCompatButton
+       android:id="@+id/btn_notes"
+       android:layout_width="0dp"
+       android:layout_height="0dp"
+       android:background="@drawable/my_button"
+       android:text="notes"
+       android:textColor="@color/white"
+       app:layout_constraintBottom_toTopOf="@+id/guideline1"
+       app:layout_constraintEnd_toStartOf="@+id/guideline85"
+       app:layout_constraintStart_toStartOf="@+id/guideline84"
+       app:layout_constraintTop_toTopOf="@+id/guideline81" />
+
+   <androidx.constraintlayout.widget.Guideline
+       android:id="@+id/guideline81"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       app:layout_constraintGuide_percent="0.88" />
+
+   <androidx.constraintlayout.widget.Guideline
+       android:id="@+id/guideline1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="horizontal"
+       app:layout_constraintGuide_percent="0.95" />
+
+   <androidx.constraintlayout.widget.Guideline
+       android:id="@+id/guideline84"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       app:layout_constraintGuide_percent="0.02" />
+
+   <androidx.constraintlayout.widget.Guideline
+       android:id="@+id/guideline85"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:orientation="vertical"
+       app:layout_constraintGuide_percent="0.98" />
 
 
-<!--   <com.google.android.material.bottomnavigation.BottomNavigationView-->
-<!--       android:id="@+id/navigation"-->
-<!--       android:layout_width="0dp"-->
-<!--       android:layout_height="0dp"-->
-<!--       android:layout_gravity="bottom"-->
-<!--       android:background="@drawable/my_bar"-->
-<!--       app:labelVisibilityMode="labeled"-->
-<!--       app:layout_constraintBottom_toBottomOf="parent"-->
-<!--       app:layout_constraintEnd_toEndOf="parent"-->
-<!--       app:layout_constraintStart_toStartOf="parent"-->
-<!--       app:layout_constraintTop_toTopOf="@+id/guideline18"-->
-<!--       app:menu="@menu/my_menu">-->
+   <!--   <com.google.android.material.bottomnavigation.BottomNavigationView-->
+   <!--       android:id="@+id/navigation"-->
+   <!--       android:layout_width="0dp"-->
+   <!--       android:layout_height="0dp"-->
+   <!--       android:layout_gravity="bottom"-->
+   <!--       android:background="@drawable/my_bar"-->
+   <!--       app:labelVisibilityMode="labeled"-->
+   <!--       app:layout_constraintBottom_toBottomOf="parent"-->
+   <!--       app:layout_constraintEnd_toEndOf="parent"-->
+   <!--       app:layout_constraintStart_toStartOf="parent"-->
+   <!--       app:layout_constraintTop_toTopOf="@+id/guideline18"-->
+   <!--       app:menu="@menu/my_menu">-->
 
-<!--   </com.google.android.material.bottomnavigation.BottomNavigationView>-->
+   <!--   </com.google.android.material.bottomnavigation.BottomNavigationView>-->
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

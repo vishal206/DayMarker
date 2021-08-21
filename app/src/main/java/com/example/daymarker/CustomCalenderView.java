@@ -58,7 +58,7 @@ public class CustomCalenderView extends LinearLayout {
     Calendar calendar=Calendar.getInstance(Locale.ENGLISH);
     Context context;
 
-    FloatingActionButton btn_refresh;
+    Button btn_refresh;
 
     SimpleDateFormat dateFormat=new SimpleDateFormat("MMMM yyyy",Locale.ENGLISH);
     SimpleDateFormat monthFormat=new SimpleDateFormat("MMMM",Locale.ENGLISH);
@@ -130,7 +130,7 @@ public class CustomCalenderView extends LinearLayout {
 
                 View addView=LayoutInflater.from(parent.getContext()).inflate(R.layout.add_new_event_layout,null);
 
-                EditText EventNote=addView.findViewById(R.id.edt_note);
+//                EditText EventNote=addView.findViewById(R.id.edt_note);
                 Button btn_done=addView.findViewById(R.id.btn_done);
                 btn_addMarker=addView.findViewById(R.id.btn_add_marker);
 
@@ -149,8 +149,8 @@ public class CustomCalenderView extends LinearLayout {
                     @Override
                     public void onClick(View v) {
                         if(clicked==true){
-                            String noteit=EventNote.getText().toString();
-                            SaveEvent(EventNote.getText().toString(),date,month,year,title,color);
+//                            String noteit=EventNote.getText().toString();
+                            SaveEvent(" ",date,month,year,title,color);
 //                        EventNote.setText(noteit);
                             SetUpCalender();
                             alertDialog.dismiss();
@@ -216,6 +216,7 @@ public class CustomCalenderView extends LinearLayout {
 
                         builder.setView(addView);
                         alertDialog=builder.create();
+                        alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                         alertDialog.show();
                     }
                 });
@@ -224,6 +225,7 @@ public class CustomCalenderView extends LinearLayout {
 
                 builder.setView(addView);
                 alertDialog=builder.create();
+                alertDialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
                 alertDialog.show();
             }
 
